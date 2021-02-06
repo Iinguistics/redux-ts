@@ -1,0 +1,10 @@
+.container{
+    max-width: 60%;
+    text-align: center;
+    margin: auto;
+}
+
+h3{
+    text-transform: uppercase;
+    margin-top: 3rem;
+}
