@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
 import { RootState } from '../state';
 import { useActions } from '../hooks/useActions';
+import { useTypedSelector } from '../hooks/useTypedSelector';
 
 
 const RepoList: React.FC = ()=>{
@@ -9,7 +9,7 @@ const RepoList: React.FC = ()=>{
 
   const { searchRepositories } = useActions();
 
-  const repos = useSelector((state:RootState) => state.repositories);
+  const repos = useTypedSelector((state:RootState) => state.repositories);
   const { loading, error, data } = repos;
 
   const searchHandler = (e:React.FormEvent<HTMLFormElement>)=>{
@@ -17,7 +17,23 @@ const RepoList: React.FC = ()=>{
        searchRepositories(term);
   }
 
-  console.log(data)
+  console.log(data);
+
+  const renderData = ()=>{
+    if(data){
+        return data.map((item: any)=>{
+            return(
+                <div key={item.name}>
+                    <h3>{item.name}</h3>
+                    <p>{item.description}</p>
+                    <a href={item.links.npm} target="_blank" rel="noreferrer">{item.name} npm package</a>
+                </div>
+            )
+        })
+    }
+  }
+
+
 
     return(
         <div>
@@ -25,6 +41,10 @@ const RepoList: React.FC = ()=>{
               <input value={term} onChange={(e)=> setTerm(e.target.value)} />
               <button type="submit">Search</button>
           </form>
+          {error && <h5>{error}</h5>}
+          {loading && <h5>Loading...</h5>}
+          {renderData()}
+         
         </div>
     )
 }

@@ -19,8 +19,10 @@ export const searchRepositories = (term: string)=>{
 
             // just the name
             const names = data.objects.map((res: any)=>{
-              return res.package.name;
+              return res.package;
             });
+
+
         dispatch({
               type: ActionType.search_repositories_success,
               payload: names
