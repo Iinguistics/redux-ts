@@ -7,3 +7,6 @@ const reducers = combineReducers({
 });
 
 export default reducers;
+
+// defining rootstate so typescript knows what to expect from the state so when useSelector hook is used it knows what type state is
+export type RootState = ReturnType<typeof reducers>;
