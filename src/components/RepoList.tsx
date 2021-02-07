@@ -17,8 +17,7 @@ const RepoList: React.FC = ()=>{
        searchRepositories(term);
   }
 
-  console.log(data);
-
+ 
   const renderData = ()=>{
     if(data){
         return data.map((item: any)=>{
